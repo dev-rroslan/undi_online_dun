@@ -1,0 +1,20 @@
+<div>
+  <.simple_form
+    :let={f}
+    for={@changeset}
+    id={@id}
+    phx-target={@myself}
+    phx-submit="save"
+  >
+    <.input field={{f, :email}} type="text" label="Email" />
+
+    <.input field={{f, :password}} type="password" label="Password" />
+    <small class="block my-1 text-info">Leave blank if you don't want to change</small>
+
+    <.input field={{f, :password_confirmation}} type="password" label="Password Confirmation" />
+
+    <:actions>
+      <.button phx-disable-with="Saving...">Save</.button>
+    </:actions>
+  </.simple_form>
+</div>

@@ -1,0 +1,48 @@
+<.modal
+  :if={@live_action in [:edit]}
+  id="admin-modal"
+  show
+  on_cancel={JS.navigate(~p"/admin/admins/#{@admin}")}
+>
+  <:title><%= @page_title %></:title>
+  <.live_component
+    module={UndiOnlineWeb.Admin.AdminsLive.FormComponent}
+    id={@admin.id || :new}
+    title={@page_title}
+    action={@live_action}
+    admin={@admin}
+    navigate={~p"/admin/admins/#{@admin}"}
+  />
+</.modal>
+
+<.admin_page_heading title="Admins">
+  <:link><.link navigate={~p"/admin"}>Dashboard</.link></:link>
+  <:link><.link navigate={~p"/admin/admins"}>Admins</.link></:link>
+  <:link><.link navigate={~p"/admin/admins/#{@admin}"}>Admin</.link></:link>
+</.admin_page_heading>
+
+<div class="flex flex-wrap">
+  <div class="w-full lg:w-2/3 grid grid-cols-1 gap-8">
+    <.card border shadow>
+      <div class="flex items-center justify-between px-4 py-3 border-b border-base-200">
+        <div class="prose">
+          <h3>Show Admin</h3>
+        </div>
+      </div>
+      <div class="card-body prose">
+        <div>
+          <strong>Name:</strong>
+          <%= @admin.name %>
+        </div>
+        <div>
+          <strong>Email:</strong>
+          <%= @admin.email %>
+        </div>
+      </div>
+      <div class="border-t card-actions border-base-200">
+        <.link patch={~p"/admin/admins/#{@admin}/show/edit"} class="btn btn-link">Edit</.link>
+        <.link navigate={~p"/admin/admins"} class="btn btn-link">Back</.link>
+      </div>
+    </.card>
+  </div>
+</div>

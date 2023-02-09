@@ -1,0 +1,17 @@
+<div id="admin-form-wrapper">
+  <.simple_form
+    :let={f}
+    for={@changeset}
+    id="admin-form"
+    phx-target={@myself}
+    phx-change="validate"
+    phx-submit="save">
+
+    <.input field={{f, :name}} type="text" label="Name" />
+    <.input field={{f, :email}} type="text" label="Email" />
+
+    <:actions>
+      <.button phx-disable-with="Saving...">Save</.button>
+    </:actions>
+  </.simple_form>
+</div>

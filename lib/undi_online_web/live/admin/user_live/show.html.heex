@@ -1,0 +1,65 @@
+<.admin_page_heading title="User">
+  <:link><.link navigate={~p"/admin"}>Dashboard</.link></:link>
+  <:link><.link navigate={~p"/admin/users"}>Users</.link></:link>
+  <:link><.link navigate={~p"/admin/users/#{@user}"}>User</.link></:link>
+
+  <.link href={~p"/admin/impersonate/#{@user.id}"} method="post" class="btn btn-outline">Impersonate</.link>
+</.admin_page_heading>
+
+<div class="flex flex-wrap">
+  <div class="w-full lg:w-2/3 grid grid-cols-1 gap-8">
+    <.card shadow border>
+      <div class="flex items-center justify-between px-4 py-3 border-b border-base-200">
+        <div class="prose">
+          <h3>Show User</h3>
+        </div>
+      </div>
+      <div class="card-body prose">
+
+        <div>
+          <strong>Email:</strong>
+          <%= @user.email %>
+        </div>
+
+        <div>
+          <strong>Signed up:</strong>
+          <%= Calendar.strftime @user.inserted_at, "%x" %>
+        </div>
+
+      </div>
+      <div class="border-t card-actions border-base-200">
+        <.link navigate={~p"/admin/users"} class="btn btn-link">Back</.link>
+      </div>
+    </.card>
+
+    <.card shadow border>
+      <div class="overflow-x-auto">
+        <table class="table w-full">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= for %{account: %{} = account} = membership <- @memberships do %>
+              <tr id={"membership-#{membership.id}"}>
+                <td>
+                  <%= account.name %>
+                  <%= if account.personal do %>
+                    <div class="badge badge-outline">Personal</div>
+                  <% end %>
+                </td>
+                <td>
+                  <div class="badge badge-success">
+                    <%= String.capitalize("#{membership.role}") %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </.card>
+  </div>
+</div>
