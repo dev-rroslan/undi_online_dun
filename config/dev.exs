@@ -5,7 +5,7 @@ config :undi_online, UndiOnline.Repo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",
-  database: "undi_online_dev",
+  database: "undi_online_dun",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
