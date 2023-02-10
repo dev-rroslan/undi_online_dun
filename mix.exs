@@ -69,6 +69,7 @@ defmodule UndiOnline.MixProject do
       {:phoenix_swoosh, "~> 1.1.0"},
       {:premailex, "~> 0.3.1"},
       {:saas_kit, "~> 0.4.0"},
+      {:ueberauth_passwordless, "~> 0.3.2"}
     ]
   end
 
